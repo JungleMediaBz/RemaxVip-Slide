@@ -1,0 +1,289 @@
+body {
+    background-color: #1a2b3c;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Logo Container */
+.logo-container {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+    padding: 0;
+}
+
+.logo-container img {
+    width: 130px;
+    height: auto;
+}
+
+.property-slider-container {
+    width: 1200px; /* Reduced width for boxed layout */
+    height: 800px; /* Reduced height for boxed layout */
+    margin: 0 auto;
+    position: relative;
+    padding: 20px;
+    background-color: #233446;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.property-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.property-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    animation: fade 0.5s ease-in-out;
+    position: relative;
+}
+
+.property-slide.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.property-image {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    border-radius: 15px;
+    position: relative;
+}
+
+.property-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.property-image img:hover {
+    transform: scale(1.05);
+}
+
+.property-overlay {
+    position: absolute;
+    top: 0;
+    right: -450px;
+    width: 400px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    box-sizing: border-box;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 15px 0 0 15px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    transform: skewX(5deg);
+    transform-origin: right;
+    opacity: 0;
+}
+
+.property-slide.active .property-overlay {
+    right: 0;
+    transform: skewX(0);
+    opacity: 1;
+}
+
+.property-info {
+    color: #233446;
+    text-align: left;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.property-info h3 {
+    color: #1a2b3c;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #1a2b3c;
+    padding-bottom: 15px;
+}
+
+.property-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.property-info li {
+    margin: 12px 0;
+    padding-left: 25px;
+    position: relative;
+    font-size: 1.1rem;
+    color: #233446;
+}
+
+.property-info li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #1a2b3c;
+    font-weight: bold;
+}
+
+.property-info .price {
+    margin-top: auto;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #1a2b3c;
+    border-top: 2px solid #1a2b3c;
+    padding-top: 15px;
+}
+
+.property-info .sku {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 10px;
+}
+
+.prev-slide,
+.next-slide {
+    position: absolute;
+    top: 35%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    padding: 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 100;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.prev-slide:hover,
+.next-slide:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-slide {
+    left: 20px;
+}
+
+.next-slide {
+    right: 20px;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.4;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 1280px) {
+    .property-slider-container {
+        width: 90%;
+        height: auto;
+        min-height: 700px;
+    }
+
+    .property-image {
+        height: 500px;
+    }
+
+    .property-info {
+        height: auto;
+        min-height: 140px;
+    }
+}
+
+/* Ensure text remains readable */
+@media screen and (max-width: 768px) {
+    .property-info h3 {
+        font-size: 1.4rem;
+    }
+    
+    .property-info p {
+        font-size: 1rem;
+    }
+}
+
+/* Listing Type Select Styling */
+#listingType {
+    padding: 12px;
+    border: 1px solid #456;
+    border-radius: 8px;
+    background: #1a2b3c;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#listingType option {
+    background: #1a2b3c;
+    color: white;
+}
+
+/* Upload Button Styling */
+.admin-controls {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 20px;
+}
+
+.upload-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.upload-button:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.upload-icon {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .admin-controls {
+        padding: 0 15px;
+    }
+    
+    .upload-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+} 

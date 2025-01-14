@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload New Listing - Admin Panel</title>
+    <!-- Add Google Fonts if you're using any specific ones -->
+    <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base font settings */
+        * {
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #1a2b3c;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            color: white;
+        }
+
+        .admin-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #233446;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            font-family: 'Arial', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.2px;
+        }
+
+        .submit-btn {
+            font-family: 'Arial', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Rest of your existing styles remain the same */
+        .upload-form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            border: 1px solid #456;
+            border-radius: 8px;
+            background: #1a2b3c;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .feature-tag {
+            background: #1a2b3c;
+            padding: 5px 10px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .feature-tag button {
+            border: none;
+            background: none;
+            color: #ff4444;
+            cursor: pointer;
+            padding: 0;
+            font-size: 1.2rem;
+        }
+
+        .submit-btn {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #45a049;
+        }
+
+        .image-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .preview-item {
+            position: relative;
+            aspect-ratio: 1;
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 0, 0, 0.7);
+            border: none;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Full width containers for features and images */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr; /* Stack on mobile */
+            }
+        }
+
+        /* Add these new logo styles */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+
+        .logo-container img {
+            width: 150px;
+            height: auto;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body style="background-color: #1a2b3c;">
+    <!-- Add logo container before admin container -->
+    <div class="logo-container">
+        <img src="images/logo.png" alt="Remax VIP Belize Logo">
+    </div>
+
+    <div class="admin-container">
+        <h1>Upload New Listing</h1>
+        <form class="upload-form" id="listingForm">
+            <!-- First Row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="listingName">Listing Name</label>
+                    <input type="text" id="listingName" name="listingName" required>
+                </div>
+                <div class="form-group">
+                    <label for="listingType">Listing Type</label>
+                    <select id="listingType" name="listingType" required>
+                        <option value="">Select Type</option>
+                        <option value="lot">Lot</option>
+                        <option value="house">House</option>
+                        <option value="condo">Condo</option>
+                        <option value="commercial">Commercial</option>
+                        <option value="rental">Rental</option>
+                        <option value="business">Business</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Second Row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price (USD)</label>
+                    <input type="number" id="price" name="price" required>
+                </div>
+            </div>
+
+            <!-- Third Row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="size">Size (Square Feet/Acres)</label>
+                    <input type="text" id="size" name="size" required>
+                </div>
+                <div class="form-group">
+                    <label for="sku">SKU</label>
+                    <input type="text" id="sku" name="sku" required>
+                </div>
+            </div>
+
+            <!-- Features - Full Width -->
+            <div class="form-group full-width">
+                <label for="features">Features</label>
+                <input type="text" id="featureInput" placeholder="Type feature and press Enter">
+                <div class="features-container" id="featuresContainer"></div>
+            </div>
+
+            <!-- Images - Full Width -->
+            <div class="form-group full-width">
+                <label for="images">Images</label>
+                <input type="file" id="images" name="images" multiple accept="image/*">
+                <div class="image-preview" id="imagePreview"></div>
+            </div>
+
+            <!-- Submit Button - Full Width -->
+            <div class="full-width">
+                <button type="submit" class="submit-btn">Upload Listing</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('listingForm');
+            const featureInput = document.getElementById('featureInput');
+            const featuresContainer = document.getElementById('featuresContainer');
+            const imageInput = document.getElementById('images');
+            const imagePreview = document.getElementById('imagePreview');
+            let features = [];
+
+            // Handle features
+            featureInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const feature = this.value.trim();
+                    if (feature && !features.includes(feature)) {
+                        features.push(feature);
+                        updateFeatures();
+                    }
+                    this.value = '';
+                }
+            });
+
+            function updateFeatures() {
+                featuresContainer.innerHTML = features.map(feature => `
+                    <div class="feature-tag">
+                        ${feature}
+                        <button type="button" onclick="removeFeature('${feature}')">&times;</button>
+                    </div>
+                `).join('');
+            }
+
+            window.removeFeature = function(feature) {
+                features = features.filter(f => f !== feature);
+                updateFeatures();
+            };
+
+            // Handle image preview
+            imageInput.addEventListener('change', function() {
+                imagePreview.innerHTML = '';
+                Array.from(this.files).forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.innerHTML += `
+                            <div class="preview-item">
+                                <img src="${e.target.result}" alt="Preview">
+                                <button type="button" class="remove-image" onclick="removeImage(${index})">&times;</button>
+                            </div>
+                        `;
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
+
+            // Form submission
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                formData.append('features', JSON.stringify(features));
+
+                try {
+                    // Replace with your actual API endpoint
+                    const response = await fetch('/api/listings', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        alert('Listing uploaded successfully!');
+                        form.reset();
+                        features = [];
+                        updateFeatures();
+                        imagePreview.innerHTML = '';
+                    } else {
+                        throw new Error('Upload failed');
+                    }
+                } catch (error) {
+                    alert('Error uploading listing: ' + error.message);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
